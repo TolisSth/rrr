@@ -16,9 +16,11 @@ fn main() {
     
     if is_rapl_mod_loaded() == true{
         println!("OK\n");
-        // daemonize(); 
     }
     else {
         println!("ERROR: No rapl module was loaded\nPlease load rapl module and try again.");
+        std::process::exit(0); 
     }
+
+
 }
