@@ -1,5 +1,6 @@
 // Author: Apostolos Chalis 2024 <achalis@csd.auth.gr> 
 use std::fs; 
+mod daemonize;
 
 fn is_rapl_mod_loaded() -> bool{
     let proc_modules = fs::read_to_string("/proc/modules").expect("ERROR: No /proc/modules found"); 
@@ -12,8 +13,8 @@ fn is_rapl_mod_loaded() -> bool{
 }
 
 fn main() {
-    println!("Rust RAPL Reader v1.0\nAuthor: Apostolos Chalis <achalis@csd.auth.gr");
-    
+    println!("Rust RAPL Reader v1.0\nAuthor: Apostolos Chalis <achalis@csd.auth.gr");    
+
     if is_rapl_mod_loaded() == true{
         println!("OK\n");
     }
@@ -21,6 +22,8 @@ fn main() {
         println!("ERROR: No rapl module was loaded\nPlease load rapl module and try again.");
         std::process::exit(0); 
     }
-
-
+    
+    daemonize::daemonize(); 
+    loop{
+    }
 }
